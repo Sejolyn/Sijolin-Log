@@ -9,7 +9,7 @@ comment: true
 
 ## webget
 
-首先来看文件 file_descriptor.hh，其中使用 `FDWrapper` 来保存fd及其状态信息，而 `FileDescriptor` 提供了对外的操作接口并通过 `shared_ptr` 来管理 `FDWrapper`，多个 `FileDescriptor` 可共享同一个fd(`FDWrapper`)，内部增加其引用计数。
+首先来看文件 `file_descriptor.hh`，其中使用 `FDWrapper` 来保存fd及其状态信息，而 `FileDescriptor` 提供了对外的操作接口并通过 `shared_ptr` 来管理 `FDWrapper`，多个 `FileDescriptor` 可共享同一个fd(`FDWrapper`)，内部增加其引用计数。
 
 在 socket.hh 中，`Socket` 继承了 `FileDescriptor`，证明 `Socket` 本身就是一个文件描述符 fd，使用 `FileDescriptor` 管理fd声明周期，并在 `Socket` 中封装了 socket 相关的操作。
 该文件中声明了许多类：
@@ -19,7 +19,7 @@ comment: true
 3. `TCPSocket`：TCP socket，继承于 `Socket`，并提供一些面向连接的 API，如 `listen()` 和 `accept()`
 4. 一些继承于 `DatagramSocket` 的 socket
 
-webget.cc 中 `get_URL()` 实现：
+`webget.cc` 中 `get_URL()` 实现：
 
 ```cpp
 // 该文件的目的是使用TCP套接字连接到Web服务器并获取一个URL。
@@ -59,7 +59,7 @@ void get_URL(const string& host, const string& path)
 
 这个实现也很简单，就是设立缓冲区，实现 stream。
 
-在 byte_stream.hh 中添加维护字段：
+在 `byte_stream.hh` 中添加维护字段：
 
 ```cpp
 protected:
