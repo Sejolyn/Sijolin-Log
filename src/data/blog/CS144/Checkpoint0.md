@@ -1,6 +1,6 @@
 ---
 title: CS144 Checkpoint0
-description: '实现get_URL请求Web数据，和一个byte stream生产者-消费者模型。'
+description: '实现get_URL请求Web数据，和TCP层次结构中的ByteStream。'
 pubDatetime: 2025-09-05 17:51:12
 tags: ['CS144']
 comment: true
@@ -105,9 +105,9 @@ void get_URL(const string& host, const string& path)
 }
 ```
 
-## An in-memory reliable byte stream
+## ByteStream
 
-这个实现也很简单，就是设立缓冲区，实现 stream。
+这个实现也很简单，就是设立缓冲区，实现 `ByteStream`。
 
 在 `byte_stream.hh` 中添加维护字段：
 
