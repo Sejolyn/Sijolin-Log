@@ -6,6 +6,22 @@ tags: ['CS144']
 comment: true
 ---
 
+整个 cs144 的实验结构层次图如下：
+```css
+应用层程序
+   │
+[ TCPSocket ]   ← 提供 connect/read/write 接口
+   │
+[ TCPConnection ] ← 整体状态机，协调发送方和接收方
+   ├─ [ TCPSender ]   ← 分片、发送、重传
+   └─ [ TCPReceiver ] ← 重排、确认、窗口
+        │
+   [ Reassembler ]   ← 拼接乱序片段
+        │
+   [ ByteStream ]    ← 有限容量的字节缓冲
+```
+
+实验的顺序为层次图从低到高，本实验中需要实现 `Reaessmbler`（重组器）。
 
 在 TCP 里，发送方会把数据切成一段一段的分组丢到网络上，接收方再想办法拼回原来的字节流。问题是网络环境并不老实，分组可能乱序、可能丢、甚至可能重复。所以我们要写一个小组件 —— **重组器 (Reassembler)**，来处理这些情况。
 

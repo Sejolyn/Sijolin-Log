@@ -6,6 +6,23 @@ tags: ['CS144']
 comment: true
 ---
 
+整个 cs144 的实验结构层次图如下：
+```css
+应用层程序
+   │
+[ TCPSocket ]   ← 提供 connect/read/write 接口
+   │
+[ TCPConnection ] ← 整体状态机，协调发送方和接收方
+   ├─ [ TCPSender ]   ← 分片、发送、重传
+   └─ [ TCPReceiver ] ← 重排、确认、窗口
+        │
+   [ Reassembler ]   ← 拼接乱序片段
+        │
+   [ ByteStream ]    ← 有限容量的字节缓冲
+```
+
+实验的顺序为层次图从低到高，本实验中需要实现 `ByteStream`。
+
 
 ## webget
 
